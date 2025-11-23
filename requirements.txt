@@ -1,0 +1,10 @@
+pandas
+numpy
+openai-whisper
+torch
+contractions
+textsearch
+anyascii
+pyahocorasick
+nltk
+tqdm
