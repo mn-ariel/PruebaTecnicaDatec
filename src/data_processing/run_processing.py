@@ -8,16 +8,6 @@ logger = logging.getLogger(__name__)
 
 
 def run_processing(model_name: str = "base") -> None:
-    """
-    Ejecuta el pipeline completo de procesamiento de datos:
-    1. Transcripción de audios .wav.
-    2. Limpieza de texto de las transcripciones.
-
-    Parámetros
-    ----------
-    model_name : str
-        Nombre del modelo de Whisper a utilizar.
-    """
     logger.info("Iniciando etapa de transcripción de audios...")
     transcripts_path: Path = transcribe_audios(model_name=model_name)
 

@@ -12,25 +12,6 @@ logger = logging.getLogger(__name__)
 
 
 def minimal_clean(text: Any) -> str:
-    """
-    Aplica una limpieza mínima al texto manteniendo información útil
-    para análisis posterior (sentimientos, temas, etc.).
-
-    Reglas:
-    - Expande contracciones en inglés (I'm -> I am).
-    - Normaliza espacios en blanco.
-    - Elimina caracteres raros, pero mantiene puntuación básica.
-
-    Parámetros
-    ----------
-    text : Any
-        Texto original.
-
-    Retorna
-    -------
-    str
-        Texto limpiado.
-    """
     if not isinstance(text, str) or pd.isna(text):
         return ""
 
@@ -47,20 +28,6 @@ def minimal_clean(text: Any) -> str:
 
 
 def clean_transcripts(transcripts_path: Path | None = None) -> Path:
-    """
-    Carga el CSV de transcripciones, aplica limpieza de texto
-    y guarda un nuevo CSV con la columna 'cleaned_transcript'.
-
-    Parámetros
-    ----------
-    transcripts_path : Path | None
-        Ruta al CSV de transcripciones. Si es None, se usa TRANSCRIPTS_CSV.
-
-    Retorna
-    -------
-    Path
-        Ruta al CSV con las transcripciones limpiadas.
-    """
     PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
 
     path = transcripts_path if transcripts_path is not None else TRANSCRIPTS_CSV

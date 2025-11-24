@@ -8,3 +8,5 @@ anyascii
 pyahocorasick
 nltk
 tqdm
+matplotlib
+seaborn
