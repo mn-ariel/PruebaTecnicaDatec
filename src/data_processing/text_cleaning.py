@@ -15,13 +15,13 @@ def minimal_clean(text: Any) -> str:
     if not isinstance(text, str) or pd.isna(text):
         return ""
 
-    # Expandir contracciones (no, I'm, you're, etc.)
+    # Expandir contracciones 
     text = contractions.fix(text)
 
     # Quitar espacios repetidos
     text = " ".join(text.split())
 
-    # Mantener letras, números y puntuación básica
+    # Mantener letras, numeros y puntuacion basica
     text = re.sub(r"[^a-zA-Z0-9\s.,!?\'-]", "", text)
 
     return text
@@ -45,19 +45,20 @@ def clean_transcripts(transcripts_path: Path | None = None) -> Path:
         logger.error(msg)
         raise ValueError(msg)
 
-    # Rellenar nulos para evitar errores en la función de limpieza
+    # Rellenar nulos para evitar errores en la funcion de limpieza
     df["transcript"] = df["transcript"].fillna("")
 
     logger.info("Aplicando limpieza mínima de texto a %d filas", len(df))
     df["cleaned_transcript"] = df["transcript"].apply(minimal_clean)
 
-    # Mantener columnas útiles: ID, file_name (si existen) y cleaned_transcript
+    # Mantener columnas utiles: ID, file_name, transcript, cleaned_transcript, duration_seconds (si existen)
     keep_columns = []
-    for col in ["ID", "file_name", "transcript", "cleaned_transcript"]:
+    for col in ["ID", "file_name", "transcript", "cleaned_transcript", "duration_seconds"]:
         if col in df.columns:
             keep_columns.append(col)
 
     cleaned_df = df[keep_columns].copy()
+
     cleaned_df.to_csv(CLEANED_TRANSCRIPTS_CSV, index=False)
 
     logger.info("Transcripciones limpiadas guardadas en: %s", CLEANED_TRANSCRIPTS_CSV)

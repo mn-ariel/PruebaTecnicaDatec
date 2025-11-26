@@ -35,7 +35,7 @@ def transcribe_audios(
     audio_files = list_wav_files(RAW_AUDIO_DIR)
     if not audio_files:
         logger.warning("No se encontraron archivos .wav en %s", RAW_AUDIO_DIR)
-        # Crear un CSV vacío para mantener consistencia en el pipeline
+        # Crea un CSV vacio para mantener consistencia en el pipeline
         empty_df = pd.DataFrame(columns=["ID", "file_name", "transcript"])
         empty_df.to_csv(TRANSCRIPTS_CSV, index=False)
         return TRANSCRIPTS_CSV
